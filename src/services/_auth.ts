@@ -5,6 +5,17 @@ import { keyVaultsConfigSelectors, userProfileSelectors } from '@/store/user/sel
 import { GlobalLLMProviderKey } from '@/types/user/settings';
 import { createJWT } from '@/utils/jwt';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const getProviderAuthPayload = (provider: string) => {
   switch (provider) {
     case ModelProvider.Bedrock: {
@@ -46,6 +57,17 @@ export const getProviderAuthPayload = (provider: string) => {
   }
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const createAuthTokenWithPayload = async (payload = {}) => {
   const accessCode = keyVaultsConfigSelectors.password(useUserStore.getState());
   const userId = userProfileSelectors.userId(useUserStore.getState());
@@ -60,6 +82,17 @@ interface AuthParams {
   provider?: string;
 }
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 // eslint-disable-next-line no-undef
 export const createHeaderWithAuth = async (params?: AuthParams): Promise<HeadersInit> => {
   let payload = params?.payload || {};

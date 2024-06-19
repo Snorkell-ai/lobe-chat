@@ -19,12 +19,15 @@ export interface AgentChatOptions {
 }
 
 /**
- * Retrieves the options object from environment and apikeymanager
- * based on the provider and payload.
+ * Transforms the sign-up request data to match the backend's expected format.
  *
- * @param provider - The model provider.
- * @param payload - The JWT payload.
- * @returns The options object.
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
   switch (provider) {
@@ -176,10 +179,15 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
 };
 
 /**
- * Initializes the agent runtime with the user payload in backend
- * @param provider - The provider name.
- * @param payload - The JWT payload.
- * @returns A promise that resolves when the agent runtime is initialized.
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const initAgentRuntimeWithUserPayload = (provider: string, payload: JWTPayload) => {
   return AgentRuntime.initializeWithProviderOptions(provider, {
@@ -187,6 +195,17 @@ export const initAgentRuntimeWithUserPayload = (provider: string, payload: JWTPa
   });
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const createTraceOptions = (
   payload: ChatStreamPayload,
   { trace: tracePayload, provider }: AgentChatOptions,

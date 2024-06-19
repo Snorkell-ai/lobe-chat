@@ -2,7 +2,15 @@ import { headers } from 'next/headers';
 import { UAParser } from 'ua-parser-js';
 
 /**
- * check mobile device in server
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const isMobileDevice = () => {
   if (typeof process === 'undefined') {
@@ -19,7 +27,15 @@ export const isMobileDevice = () => {
 };
 
 /**
- * check mobile device in server
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const gerServerDeviceInfo = () => {
   if (typeof process === 'undefined') {

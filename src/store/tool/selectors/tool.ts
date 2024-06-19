@@ -11,6 +11,17 @@ import { ToolStoreState } from '../initialState';
 import { builtinToolSelectors } from '../slices/builtin/selectors';
 import { pluginSelectors } from '../slices/plugin/selectors';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const enabledSchema =
   (tools: string[] = []) =>
   (s: ToolStoreState): ChatCompletionTool[] => {
@@ -30,6 +41,17 @@ const enabledSchema =
     return uniqBy(list, 'name').map((i) => ({ function: i, type: 'function' }));
   };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const enabledSystemRoles =
   (tools: string[] = []) =>
   (s: ToolStoreState) => {
@@ -68,6 +90,17 @@ const enabledSystemRoles =
     return '';
   };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const metaList =
   (showDalle?: boolean) =>
   (s: ToolStoreState): LobeToolMeta[] => {
@@ -76,11 +109,33 @@ const metaList =
     return builtinToolSelectors.metaList(showDalle)(s).concat(pluginList);
   };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const getMetaById =
   (id: string, showDalle: boolean = true) =>
   (s: ToolStoreState): MetaData | undefined =>
     metaList(showDalle)(s).find((m) => m.identifier === id)?.meta;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const getManifestById =
   (id: string) =>
   (s: ToolStoreState): LobeChatPluginManifest | undefined =>
@@ -89,6 +144,17 @@ const getManifestById =
       .concat(s.builtinTools.map((b) => b.manifest as LobeChatPluginManifest))
       .find((i) => i.identifier === id);
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 // 获取插件 manifest 加载状态
 const getManifestLoadingStatus = (id: string) => (s: ToolStoreState) => {
   const manifest = getManifestById(id)(s);

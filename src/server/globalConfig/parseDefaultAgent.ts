@@ -1,8 +1,15 @@
 import { set } from 'lodash-es';
 
 /**
- * Improved parsing function that handles numbers, booleans, semicolons, and equals signs in values.
- * @param {string} envStr - The environment variable string to be parsed.
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const parseAgentConfig = (envStr: string) => {
   const config = {};

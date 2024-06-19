@@ -13,6 +13,17 @@ import { getTracePayload } from '@/utils/trace';
 
 import { parserPluginSettings } from './settings';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const checkAuth = (accessCode: string | null, oauthAuthorized: boolean | null) => {
   const { ACCESS_CODES, PLUGIN_SETTINGS } = getAppConfig();
 
@@ -38,6 +49,17 @@ const defaultPluginSettings = parserPluginSettings(PLUGIN_SETTINGS);
 
 const handler = createGatewayOnEdgeRuntime({ defaultPluginSettings, pluginsIndexUrl });
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const POST = async (req: Request) => {
   // get Authorization from header
   const authorization = req.headers.get(LOBE_CHAT_AUTH_HEADER);

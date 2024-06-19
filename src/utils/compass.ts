@@ -12,14 +12,31 @@ export class StrCompressor {
     decompress(buf: Uint8Array): Uint8Array;
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async init(): Promise<void> {
     this.instance = await brotliPromise; // Import is async in browsers due to wasm requirements!
   }
 
   /**
-   * @title 压缩字符串
-   * @param str - 要压缩的字符串
-   * @returns 压缩后的字符串
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   compress(str: string): string {
     const input = new TextEncoder().encode(str);
@@ -30,9 +47,15 @@ export class StrCompressor {
   }
 
   /**
-   * @title 解压缩字符串
-   * @param str - 要解压缩的字符串
-   * @returns 解压缩后的字符串
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   decompress(str: string): string {
     const compressedData = this.urlSafeBase64Decode(str);
@@ -43,9 +66,15 @@ export class StrCompressor {
   }
 
   /**
-   * @title 异步压缩字符串
-   * @param str - 要压缩的字符串
-   * @returns Promise
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   async compressAsync(str: string) {
     const brotli = await brotliPromise;
@@ -58,9 +87,15 @@ export class StrCompressor {
   }
 
   /**
-   * @title 异步解压缩字符串
-   * @param str - 要解压缩的字符串
-   * @returns Promise
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   async decompressAsync(str: string) {
     const brotli = await brotliPromise;

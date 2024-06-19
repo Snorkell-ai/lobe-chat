@@ -42,61 +42,59 @@ class AgentRuntime {
   }
 
   /**
-   * Initiates a chat session with the agent.
+   * Transforms the sign-up request data to match the backend's expected format.
    *
-   * @param payload - The payload containing the chat stream data.
-   * @param options - Optional chat competition options.
-   * @returns A Promise that resolves to the chat response.
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
    *
-   * @example - Use without trace
-   * ```ts
-   * const agentRuntime = await initializeWithClientStore(provider, payload);
-   * const data = payload as ChatStreamPayload;
-   * return await agentRuntime.chat(data);
-   * ```
-   *
-   * @example - Use Langfuse trace
-   * ```ts
-   * // ============  1. init chat model   ============ //
-   * const agentRuntime = await initAgentRuntimeWithUserPayload(provider, jwtPayload);
-   * // ============  2. create chat completion   ============ //
-   * const data = {
-   * // your trace options here
-   *  } as ChatStreamPayload;
-   * const tracePayload = getTracePayload(req);
-   * return await agentRuntime.chat(data, createTraceOptions(data, {
-   *   provider,
-   *   trace: tracePayload,
-   * }));
-   * ```
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   async chat(payload: ChatStreamPayload, options?: ChatCompetitionOptions) {
     return this._runtime.chat(payload, options);
   }
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async textToImage(payload: TextToImagePayload) {
     return this._runtime.textToImage?.(payload);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async models() {
     return this._runtime.models?.();
   }
 
   /**
-   * @description Initialize the runtime with the provider and the options
-   * @param provider choose a model provider
-   * @param params options of the choosed provider
-   * @returns the runtime instance
-   * Try to initialize the runtime with the provider and the options.
-   * @example
-   * ```ts
-   * const runtime = await AgentRuntime.initializeWithProviderOptions(provider, {
-   *    [provider]: {...options},
-   * })
-   * ```
-   * **Note**: If you try to get a AgentRuntime instance from client or server,
-   * you should use the methods to get the runtime instance at first.
-   * - `src/app/api/chat/agentRuntime.ts: initAgentRuntimeWithUserPayload` on server
-   * - `src/services/chat.ts: initializeWithClientStore` on client
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   static async initializeWithProviderOptions(
     provider: string,

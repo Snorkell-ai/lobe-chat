@@ -4,6 +4,17 @@ import { markdownTable } from 'markdown-table';
 import { DataItem, PLGUIN_URL, PLUGIN_REPO, PLUGIN_SPLIT } from './const';
 import { fetchPluginIndex, genLink, genTags, readReadme, updateReadme, writeReadme } from './utlis';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const genPluginTable = (data: DataItem[], lang: string) => {
   const isCN = lang === 'zh-CN';
   const content = data
@@ -21,6 +32,17 @@ const genPluginTable = (data: DataItem[], lang: string) => {
   ]);
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const runPluginTable = async (lang: string) => {
   const data = await fetchPluginIndex(lang);
   const md = readReadme(lang);

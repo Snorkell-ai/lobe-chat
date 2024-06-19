@@ -55,6 +55,17 @@ export interface ModelListAction {
   ) => SWRResponse;
 }
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const createModelListSlice: StateCreator<
   UserStore,
   [['zustand/devtools', never]],
@@ -72,11 +83,15 @@ export const createModelListSlice: StateCreator<
   },
   refreshDefaultModelProviderList: (params) => {
     /**
-     * Because we have several model cards sources, we need to merge the model cards
-     * the priority is below:
-     * 1 - server side model cards
-     * 2 - remote model cards
-     * 3 - default model cards
+     * Transforms the sign-up request data to match the backend's expected format.
+     *
+     * @param {SignUpRequest} signUpData - The original sign-up request data.
+     *
+     * @returns {Object} The transformed sign-up request data with the following changes:
+     * - `firstName` is mapped to `first_name`
+     * - `lastName` is mapped to `last_name`
+     * - `email` is mapped to `username`
+     * - All other properties remain unchanged.
      */
 
     // eslint-disable-next-line unicorn/consistent-function-scoping

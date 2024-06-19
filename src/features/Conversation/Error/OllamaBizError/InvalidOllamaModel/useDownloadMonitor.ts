@@ -2,6 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 
 import { formatTime } from '@/utils/speed';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const formatSize = (bytes: number): string => {
   const kbSize = bytes / 1024;
   if (kbSize < 1024) {
@@ -15,10 +26,32 @@ export const formatSize = (bytes: number): string => {
   }
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const formatSpeed = (speed: number): string => {
   return `${formatSize(speed)}/s`;
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const useDownloadMonitor = (totalSize: number, completedSize: number) => {
   const [downloadSpeed, setDownloadSpeed] = useState<string>('0 KB/s');
   const [remainingTime, setRemainingTime] = useState<string>('-');

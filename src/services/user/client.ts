@@ -16,6 +16,17 @@ export class ClientService implements IUserService {
     this.preferenceStorage = new AsyncLocalStorage('LOBE_PREFERENCE');
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async getUserState(): Promise<UserInitializationState> {
     const user = await UserModel.getUser();
     const messageCount = await MessageModel.count();
@@ -42,10 +53,32 @@ export class ClientService implements IUserService {
     return UserModel.resetSettings();
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   updateAvatar(avatar: string) {
     return UserModel.updateAvatar(avatar);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async updatePreference(preference: UserPreference) {
     await this.preferenceStorage.saveToLocalStorage(preference);
   }

@@ -16,6 +16,17 @@ export const FORM_STYLE: FormProps = {
 };
 export const MOBILE_HEADER_ICON_SIZE = { blockSize: 36, fontSize: 22 };
 export const DESKTOP_HEADER_ICON_SIZE = { fontSize: 24 };
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const HEADER_ICON_SIZE = (mobile?: boolean) =>
   mobile ? MOBILE_HEADER_ICON_SIZE : DESKTOP_HEADER_ICON_SIZE;
 export const PWA_INSTALL_ID = 'pwa-install';

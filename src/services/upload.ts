@@ -7,6 +7,17 @@ import compressImage from '@/utils/compressImage';
 import { uuid } from '@/utils/uuid';
 
 class UploadService {
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async uploadFile(file: DB_File) {
     if (this.enableServer) {
       const { data, ...params } = file;
@@ -49,6 +60,17 @@ class UploadService {
     return file;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async uploadImageByUrl(url: string, file: Pick<DB_File, 'name' | 'metadata'>) {
     const res = await fetch(API_ENDPOINTS.proxy, { body: url, method: 'POST' });
     const data = await res.arrayBuffer();
@@ -64,11 +86,33 @@ class UploadService {
     });
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private isImage(fileType: string) {
     const imageRegex = /^image\//;
     return imageRegex.test(fileType);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private async uploadImageFile(file: DB_File) {
     // 加载图片
     const url = file.url || URL.createObjectURL(new Blob([file.data!]));

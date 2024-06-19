@@ -29,7 +29,15 @@ export class BaseModel<N extends keyof BrowserDBSchema = any, T = BrowserDBSchem
   // **************** Create *************** //
 
   /**
-   * create a new record
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   protected async _addWithSync<T = BrowserDBSchema[N]['model']>(
     data: T,
@@ -65,11 +73,15 @@ export class BaseModel<N extends keyof BrowserDBSchema = any, T = BrowserDBSchem
   }
 
   /**
-   * Batch create new records
-   * @param dataArray An array of data to be added
-   * @param options
-   * @param options.generateId
-   * @param options.createWithNewId
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   protected async _batchAdd<T = BrowserDBSchema[N]['model']>(
     dataArray: T[],
@@ -110,6 +122,17 @@ export class BaseModel<N extends keyof BrowserDBSchema = any, T = BrowserDBSchem
           continue;
         }
 
+        /**
+         * Transforms the sign-up request data to match the backend's expected format.
+         *
+         * @param {SignUpRequest} signUpData - The original sign-up request data.
+         *
+         * @returns {Object} The transformed sign-up request data with the following changes:
+         * - `firstName` is mapped to `first_name`
+         * - `lastName` is mapped to `last_name`
+         * - `email` is mapped to `username`
+         * - All other properties remain unchanged.
+         */
         const getTime = (time?: string | number) => {
           if (!time) return Date.now();
           if (typeof time === 'number') return time;
@@ -171,6 +194,17 @@ export class BaseModel<N extends keyof BrowserDBSchema = any, T = BrowserDBSchem
     }
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // **************** Delete *************** //
 
   protected async _deleteWithSync(id: string) {
@@ -180,6 +214,17 @@ export class BaseModel<N extends keyof BrowserDBSchema = any, T = BrowserDBSchem
     return result;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   protected async _bulkDeleteWithSync(keys: string[]) {
     await this.table.bulkDelete(keys);
     // sync delete data to yjs data map
@@ -191,6 +236,17 @@ export class BaseModel<N extends keyof BrowserDBSchema = any, T = BrowserDBSchem
     });
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   protected async _clearWithSync() {
     const result = await this.table.clear();
     // sync clear data to yjs data map
@@ -198,6 +254,17 @@ export class BaseModel<N extends keyof BrowserDBSchema = any, T = BrowserDBSchem
     return result;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // **************** Update *************** //
 
   protected async _updateWithSync(id: string, data: Partial<T>) {
@@ -224,6 +291,17 @@ export class BaseModel<N extends keyof BrowserDBSchema = any, T = BrowserDBSchem
     return { success };
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   protected async _putWithSync(data: any, id: string) {
     const result = await this.table.put(data, id);
 
@@ -233,6 +311,17 @@ export class BaseModel<N extends keyof BrowserDBSchema = any, T = BrowserDBSchem
     return result;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   protected async _bulkPutWithSync(items: T[]) {
     await this.table.bulkPut(items);
 

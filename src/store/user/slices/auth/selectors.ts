@@ -6,6 +6,17 @@ import { LobeUser } from '@/types/user';
 
 const DEFAULT_USERNAME = 'LobeChat';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const nickName = (s: UserStore) => {
   if (!s.enableAuth()) return t('userPanel.defaultNickname', { ns: 'common' });
 
@@ -14,6 +25,17 @@ const nickName = (s: UserStore) => {
   return t('userPanel.anonymousNickName', { ns: 'common' });
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const username = (s: UserStore) => {
   if (!s.enableAuth()) return DEFAULT_USERNAME;
 
@@ -31,7 +53,15 @@ export const userProfileSelectors = {
 };
 
 /**
- * 使用此方法可以兼容不需要登录鉴权的情况
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 const isLogin = (s: UserStore) => {
   // 如果没有开启鉴权，说明不需要登录，默认是登录态

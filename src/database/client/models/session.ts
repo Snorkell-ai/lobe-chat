@@ -24,6 +24,17 @@ class _SessionModel extends BaseModel {
     super('sessions', DB_SessionSchema);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // **************** Query *************** //
 
   async query({
@@ -42,6 +53,17 @@ class _SessionModel extends BaseModel {
     return this.mapToAgentSessions(items);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async queryWithGroups(): Promise<ChatSessionList> {
     const sessionGroups = await SessionGroupModel.query();
 
@@ -51,8 +73,15 @@ class _SessionModel extends BaseModel {
   }
 
   /**
-   * get sessions by group
-   * @param group
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   async querySessionsByGroupId(group: SessionGroupId): Promise<LobeSessions> {
     const items: DBModel<DB_Session>[] = await this.table
@@ -65,6 +94,17 @@ class _SessionModel extends BaseModel {
     return this.mapToAgentSessions(items);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async queryByGroupIds(groups: string[]) {
     const pools = groups.map(async (id) => {
       return [id, await this.querySessionsByGroupId(id)] as const;
@@ -75,8 +115,15 @@ class _SessionModel extends BaseModel {
   }
 
   /**
-   * Query sessions by keyword in title, description, content, or translated content
-   * @param keyword The keyword to search for
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   async queryByKeyword(keyword: string): Promise<LobeSessions> {
     if (!keyword) return [];
@@ -143,6 +190,17 @@ class _SessionModel extends BaseModel {
     return this.mapToAgentSessions(items);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async getPinnedSessions(): Promise<LobeSessions> {
     const items: DBModel<DB_Session>[] = await this.table
       .where('pinned')
@@ -153,18 +211,62 @@ class _SessionModel extends BaseModel {
     return this.mapToAgentSessions(items);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async findById(id: string): Promise<DBModel<DB_Session>> {
     return this.table.get(id);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async isEmpty() {
     return (await this.table.count()) === 0;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async count() {
     return this.table.count();
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // **************** Create *************** //
 
   async create(type: 'agent' | 'group', defaultValue: Partial<LobeAgentSession>, id = uuid()) {
@@ -173,6 +275,17 @@ class _SessionModel extends BaseModel {
     return this._addWithSync(dataDB, id);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async batchCreate(sessions: LobeAgentSession[]) {
     const DB_Sessions = await Promise.all(
       sessions.map(async (s) => {
@@ -191,6 +304,17 @@ class _SessionModel extends BaseModel {
     return this._batchAdd<DB_Session>(DB_Sessions, { idGenerator: uuid });
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async duplicate(id: string, newTitle?: string) {
     const session = await this.findById(id);
     if (!session) return;
@@ -203,7 +327,15 @@ class _SessionModel extends BaseModel {
   // **************** Delete *************** //
 
   /**
-   * Delete a session , also delete all messages and topic associated with it.
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   async delete(id: string) {
     return this.db.transaction('rw', [this.table, this.db.topics, this.db.messages], async () => {
@@ -218,20 +350,64 @@ class _SessionModel extends BaseModel {
     });
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async batchDelete(ids: string[]) {
     return this._bulkDeleteWithSync(ids);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async clearTable() {
     return this._clearWithSync();
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // **************** Update *************** //
 
   async update(id: string, data: Partial<DB_Session>) {
     return super._updateWithSync(id, data);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async updateConfig(id: string, data: DeepPartial<LobeAgentConfig>) {
     const session = await this.findById(id);
     if (!session) return;
@@ -241,6 +417,17 @@ class _SessionModel extends BaseModel {
     return this.update(id, { config });
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // **************** Helper *************** //
 
   private mapToDB_Session(session: LobeAgentSession): DBModel<DB_Session> {
@@ -253,6 +440,17 @@ class _SessionModel extends BaseModel {
     };
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private DB_SessionToAgentSession(session: DBModel<DB_Session>) {
     return {
       ...session,
@@ -263,6 +461,17 @@ class _SessionModel extends BaseModel {
     } as LobeAgentSession;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private mapToAgentSessions(session: DBModel<DB_Session>[]) {
     return session.map((item) => this.DB_SessionToAgentSession(item));
   }

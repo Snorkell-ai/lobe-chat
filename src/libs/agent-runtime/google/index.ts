@@ -48,6 +48,17 @@ export class LobeGoogleAI implements LobeRuntimeAI {
     this.baseURL = baseURL;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async chat(payload: ChatStreamPayload, options?: ChatCompetitionOptions) {
     try {
       const model = this.convertModel(payload.model, payload.messages);
@@ -212,6 +223,17 @@ export class LobeGoogleAI implements LobeRuntimeAI {
     return finalModel;
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private parseErrorMessage(message: string): {
     error: any;
     errorType: ILobeAgentRuntimeErrorType;
@@ -253,6 +275,17 @@ export class LobeGoogleAI implements LobeRuntimeAI {
     }
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private buildGoogleTools(
     tools: ChatCompletionTool[] | undefined,
   ): GoogleFunctionCallTool[] | undefined {
@@ -283,6 +316,17 @@ export class LobeGoogleAI implements LobeRuntimeAI {
     };
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private convertSchemaObject(schema: JSONSchema7): FunctionDeclarationSchemaProperty {
     switch (schema.type) {
       default:

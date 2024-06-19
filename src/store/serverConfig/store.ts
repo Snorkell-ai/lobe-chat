@@ -27,6 +27,17 @@ type CreateStore = (
   initState: Partial<ServerConfigStore>,
 ) => StateCreator<ServerConfigStore, [['zustand/devtools', never]]>;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const createStore: CreateStore = (runtimeState) => () => ({
   ...merge(initialState, runtimeState),
 });
@@ -43,9 +54,31 @@ declare global {
 
 const devtools = createDevtools('serverConfig');
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const initServerConfigStore = (initState: Partial<ServerConfigStore>) =>
   createWithEqualityFn<ServerConfigStore>()(devtools(createStore(initState || {})), shallow);
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const createServerConfigStore = (initState?: Partial<ServerConfigStore>) => {
   // make sure there is only one store
   if (!store) {

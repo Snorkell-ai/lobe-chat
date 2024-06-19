@@ -4,7 +4,15 @@ import { LOBE_DEFAULT_MODEL_LIST } from '@/config/modelProviders';
 import { ChatModelCard } from '@/types/llm';
 
 /**
- * Parse model string to add or remove models.
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const parseModelString = (modelString: string = '', withDeploymentName = false) => {
   let models: ChatModelCard[] = [];
@@ -85,7 +93,15 @@ export const parseModelString = (modelString: string = '', withDeploymentName = 
 };
 
 /**
- * Extract a special method to process chatModels
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const transformToChatModelCards = ({
   modelString = '',
@@ -146,6 +162,17 @@ export const transformToChatModelCards = ({
   });
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const extractEnabledModels = (modelString: string = '', withDeploymentName = false) => {
   const modelConfig = parseModelString(modelString, withDeploymentName);
   const list = modelConfig.add.map((m) => m.id);

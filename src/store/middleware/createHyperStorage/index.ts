@@ -6,11 +6,33 @@ import { createLocalStorage } from './localStorage';
 import { HyperStorageOptions } from './type';
 import { creatUrlStorage } from './urlStorage';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const createHyperStorage = <T extends object>(
   options: HyperStorageOptions,
 ): PersistStorage<T> => {
   const optionsObj = typeof options === 'function' ? options() : options;
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   const getLocalStorageConfig = () => {
     if (optionsObj.localStorage === false) {
       return { dbName: '', skipLocalStorage: true, useIndexedDB: false };

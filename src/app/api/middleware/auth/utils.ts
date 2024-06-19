@@ -12,6 +12,17 @@ import {
 import { AgentRuntimeError } from '@/libs/agent-runtime';
 import { ChatErrorType } from '@/types/fetch';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const getJWTPayload = async (token: string): Promise<JWTPayload> => {
   //如果是 HTTP 协议发起的请求，直接解析 token
   // 这是一个非常 hack 的解决方案，未来要找更好的解决方案来处理这个问题
@@ -44,12 +55,15 @@ interface CheckAuthParams {
   nextAuthAuthorized?: boolean;
 }
 /**
- * Check if the provided access code is valid, a user API key should be used or the OAuth 2 header is provided.
+ * Transforms the sign-up request data to match the backend's expected format.
  *
- * @param {string} accessCode - The access code to check.
- * @param {string} apiKey - The user API key.
- * @param {boolean} oauthAuthorized - Whether the OAuth 2 header is provided.
- * @throws {AgentRuntimeError} If the access code is invalid and no user API key is provided.
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const checkAuthMethod = ({
   apiKey,

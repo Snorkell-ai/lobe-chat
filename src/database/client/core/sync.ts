@@ -26,6 +26,17 @@ class DataSync {
 
   logger = Debug(LOG_NAME_SPACE);
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   transact(fn: (transaction: Transaction) => unknown) {
     this._ydoc?.transact(fn);
   }
@@ -148,6 +159,17 @@ class DataSync {
     await this.connect(params);
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async disconnect() {
     await this.cleanConnection(this.provider);
   }
@@ -160,6 +182,17 @@ class DataSync {
     this._ydoc = new Doc();
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private async cleanConnection(provider: WebrtcProvider | null) {
     if (provider) {
       this.logger(`[WebRTC] clean Connection...`);

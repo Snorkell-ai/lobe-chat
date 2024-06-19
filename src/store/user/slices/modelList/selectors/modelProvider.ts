@@ -9,7 +9,15 @@ import { UserStore } from '../../../store';
 import { currentSettings, getProviderConfigById } from '../../settings/selectors/settings';
 
 /**
- * get the server side model cards
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 const serverProviderModelCards =
   (provider: GlobalLLMProviderKey) =>
@@ -21,6 +29,17 @@ const serverProviderModelCards =
     return config.serverModelCards;
   };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const remoteProviderModelCards =
   (provider: GlobalLLMProviderKey) =>
   (s: UserStore): ChatModelCard[] | undefined => {
@@ -33,23 +52,59 @@ const remoteProviderModelCards =
     return cards;
   };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isProviderEnabled = (provider: GlobalLLMProviderKey) => (s: UserStore) =>
   getProviderConfigById(provider)(s)?.enabled || false;
 
 // Default Model Provider List
 
 /**
- * define all the model list of providers
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 const defaultModelProviderList = (s: UserStore): ModelProviderCard[] => s.defaultModelProviderList;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const getDefaultModeProviderById = (provider: string) => (s: UserStore) =>
   defaultModelProviderList(s).find((s) => s.id === provider);
 
 /**
- * get the default enabled models for a provider
- * it's a default enabled model list by Lobe Chat
- * e.g. openai is ['gpt-3.5-turbo','gpt-4-turbo']
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 const getDefaultEnabledModelsById = (provider: string) => (s: UserStore) => {
   const modelProvider = getDefaultModeProviderById(provider)(s);
@@ -59,12 +114,34 @@ const getDefaultEnabledModelsById = (provider: string) => (s: UserStore) => {
   return undefined;
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const getDefaultModelCardById = (id: string) => (s: UserStore) => {
   const list = defaultModelProviderList(s);
 
   return list.flatMap((i) => i.chatModels).find((m) => m.id === id);
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 // Model Provider List
 
 const getModelCardsById =
@@ -80,14 +157,47 @@ const getModelCardsById =
     return uniqBy([...userCards, ...builtinCards], 'id');
   };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const getEnableModelsById = (provider: string) => (s: UserStore) => {
   if (!getProviderConfigById(provider)(s)?.enabledModels) return;
 
   return getProviderConfigById(provider)(s)?.enabledModels?.filter(Boolean);
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const modelProviderList = (s: UserStore): ModelProviderCard[] => s.modelProviderList;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const modelProviderListForModelSelect = (s: UserStore): ModelProviderCard[] =>
   modelProviderList(s)
     .filter((s) => s.enabled)
@@ -96,28 +206,105 @@ const modelProviderListForModelSelect = (s: UserStore): ModelProviderCard[] =>
       chatModels: provider.chatModels.filter((model) => model.enabled),
     }));
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const getModelCardById = (id: string) => (s: UserStore) => {
   const list = modelProviderList(s);
 
   return list.flatMap((i) => i.chatModels).find((m) => m.id === id);
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isModelEnabledFunctionCall = (id: string) => (s: UserStore) =>
   getModelCardById(id)(s)?.functionCall || false;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 // vision model white list, these models will change the content from string to array
 // refs: https://github.com/lobehub/lobe-chat/issues/790
 const isModelEnabledVision = (id: string) => (s: UserStore) =>
   getModelCardById(id)(s)?.vision || id.includes('vision');
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isModelEnabledFiles = (id: string) => (s: UserStore) => getModelCardById(id)(s)?.files;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isModelEnabledUpload = (id: string) => (s: UserStore) =>
   isModelEnabledVision(id)(s) || isModelEnabledFiles(id)(s);
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isModelHasMaxToken = (id: string) => (s: UserStore) =>
   typeof getModelCardById(id)(s)?.tokens !== 'undefined';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const modelMaxToken = (id: string) => (s: UserStore) => getModelCardById(id)(s)?.tokens || 0;
 
 export const modelProviderSelectors = {

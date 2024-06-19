@@ -12,6 +12,17 @@ if (authEnv.NEXT_PUBLIC_ENABLE_CLERK_AUTH && isServerMode && !authEnv.CLERK_WEBH
   throw new Error('`CLERK_WEBHOOK_SECRET` environment variable is missing');
 }
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const createUser = async (id: string, params: UserJSON) => {
   pino.info('creating user due to clerk webhook');
 
@@ -44,6 +55,17 @@ const createUser = async (id: string, params: UserJSON) => {
   return NextResponse.json({ message: 'user created', success: true }, { status: 200 });
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const deleteUser = async (id?: string) => {
   if (id) {
     pino.info('delete user due to clerk webhook');
@@ -58,6 +80,17 @@ const deleteUser = async (id?: string) => {
   }
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const updateUser = async (id: string, params: UserJSON) => {
   pino.info('updating user due to clerk webhook');
 
@@ -92,6 +125,17 @@ const updateUser = async (id: string, params: UserJSON) => {
   return NextResponse.json({ message: 'user updated', success: true }, { status: 200 });
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const POST = async (req: Request): Promise<NextResponse> => {
   const payload = await validateRequest(req, authEnv.CLERK_WEBHOOK_SECRET!);
 

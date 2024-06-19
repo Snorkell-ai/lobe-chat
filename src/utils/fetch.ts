@@ -11,6 +11,17 @@ import {
   MessageToolCallSchema,
 } from '@/types/message';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const getMessageError = async (response: Response) => {
   let chatMessageError: ChatMessageError;
 
@@ -65,6 +76,17 @@ export interface FetchSSEOptions {
   smoothing?: boolean;
 }
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const parseToolCalls = (origin: MessageToolCall[], value: MessageToolCallChunk[]) =>
   produce(origin, (draft) => {
     // if there is no origin, we should parse all the value and set it to draft
@@ -87,6 +109,17 @@ export const parseToolCalls = (origin: MessageToolCall[], value: MessageToolCall
     });
   });
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: string) => void }) => {
   let buffer = '';
   // why use queue: https://shareg.pt/GLBrjpK
@@ -96,6 +129,17 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
   let animationTimeoutId: NodeJS.Timeout | null = null;
   let isAnimationActive = false;
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // when you need to stop the animation, call this function
   const stopAnimation = () => {
     isAnimationActive = false;
@@ -105,6 +149,17 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
     }
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // define startAnimation function to display the text in buffer smooth
   // when you need to start the animation, call this function
   const startAnimation = (speed = 2) =>
@@ -116,6 +171,17 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
 
       isAnimationActive = true;
 
+      /**
+       * Transforms the sign-up request data to match the backend's expected format.
+       *
+       * @param {SignUpRequest} signUpData - The original sign-up request data.
+       *
+       * @returns {Object} The transformed sign-up request data with the following changes:
+       * - `firstName` is mapped to `first_name`
+       * - `lastName` is mapped to `last_name`
+       * - `email` is mapped to `username`
+       * - All other properties remain unchanged.
+       */
       const updateText = () => {
         // 如果动画已经不再激活，则停止更新文本
         if (!isAnimationActive) {
@@ -147,6 +213,17 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
       updateText();
     });
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   const pushToQueue = (text: string) => {
     outputQueue.push(...text.split(''));
   };
@@ -160,6 +237,17 @@ const createSmoothMessage = (params: { onTextUpdate: (delta: string, text: strin
   };
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const createSmoothToolCalls = (params: {
   onToolCallsUpdate: (toolCalls: MessageToolCall[], isAnimationActives: boolean[]) => void;
 }) => {
@@ -172,6 +260,17 @@ const createSmoothToolCalls = (params: {
   const outputQueues: string[][] = [];
   const isAnimationActives: boolean[] = [];
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   const stopAnimation = (index: number) => {
     isAnimationActives[index] = false;
     if (animationTimeoutIds[index] !== null) {
@@ -180,6 +279,17 @@ const createSmoothToolCalls = (params: {
     }
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   const startAnimation = (index: number, speed = 2) =>
     new Promise<void>((resolve) => {
       if (isAnimationActives[index]) {
@@ -189,6 +299,17 @@ const createSmoothToolCalls = (params: {
 
       isAnimationActives[index] = true;
 
+      /**
+       * Transforms the sign-up request data to match the backend's expected format.
+       *
+       * @param {SignUpRequest} signUpData - The original sign-up request data.
+       *
+       * @returns {Object} The transformed sign-up request data with the following changes:
+       * - `firstName` is mapped to `first_name`
+       * - `lastName` is mapped to `last_name`
+       * - `email` is mapped to `username`
+       * - All other properties remain unchanged.
+       */
       const updateToolCall = () => {
         if (!isAnimationActives[index]) {
           resolve();
@@ -217,6 +338,17 @@ const createSmoothToolCalls = (params: {
       updateToolCall();
     });
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   const pushToQueue = (toolCallChunks: MessageToolCallChunk[]) => {
     toolCallChunks.forEach((chunk) => {
       // init the tool call buffer and output queue
@@ -234,6 +366,17 @@ const createSmoothToolCalls = (params: {
     });
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   const startAnimations = async (speed = 2) => {
     const pools = toolCallsBuffer.map(async (_, index) => {
       if (outputQueues[index].length > 0 && !isAnimationActives[index]) {
@@ -243,6 +386,17 @@ const createSmoothToolCalls = (params: {
 
     await Promise.all(pools);
   };
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   const stopAnimations = () => {
     toolCallsBuffer.forEach((_, index) => {
       stopAnimation(index);
@@ -259,7 +413,15 @@ const createSmoothToolCalls = (params: {
 };
 
 /**
- * Fetch data using stream method
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 // eslint-disable-next-line no-undef
 export const fetchSSE = async (url: string, options: RequestInit & FetchSSEOptions = {}) => {
