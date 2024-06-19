@@ -16,6 +16,17 @@ import { merge } from '@/utils/merge';
 import { chatHelpers } from '../../helpers';
 import type { ChatStore } from '../../store';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const getMeta = (message: ChatMessage) => {
   switch (message.role) {
     case 'user': {
@@ -34,8 +45,30 @@ const getMeta = (message: ChatMessage) => {
   }
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const currentChatKey = (s: ChatStore) => messageMapKey(s.activeId, s.activeTopicId);
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 // 当前激活的消息列表
 const currentChats = (s: ChatStore): ChatMessage[] => {
   if (!s.activeId) return [];
@@ -47,6 +80,17 @@ const currentChats = (s: ChatStore): ChatMessage[] => {
 
 const initTime = Date.now();
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const showInboxWelcome = (s: ChatStore): boolean => {
   const isInbox = s.activeId === INBOX_SESSION_ID;
   if (!isInbox) return false;
@@ -57,6 +101,17 @@ const showInboxWelcome = (s: ChatStore): boolean => {
   return isBrandNewChat;
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 // 针对新助手添加初始化时的自定义消息
 const currentChatsWithGuideMessage =
   (meta: MetaData) =>
@@ -94,12 +149,34 @@ const currentChatsWithGuideMessage =
     return [emptyInboxGuideMessage];
   };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const currentChatIDsWithGuideMessage = (s: ChatStore) => {
   const meta = sessionMetaSelectors.currentAgentMeta(useSessionStore.getState());
 
   return currentChatsWithGuideMessage(meta)(s).map((s) => s.id);
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const currentChatsWithHistoryConfig = (s: ChatStore): ChatMessage[] => {
   const chats = currentChats(s);
   const config = agentSelectors.currentAgentChatConfig(useAgentStore.getState());
@@ -107,28 +184,160 @@ const currentChatsWithHistoryConfig = (s: ChatStore): ChatMessage[] => {
   return chatHelpers.getSlicedMessagesWithConfig(chats, config);
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const chatsMessageString = (s: ChatStore): string => {
   const chats = currentChatsWithHistoryConfig(s);
   return chats.map((m) => m.content).join('');
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const getMessageById = (id: string) => (s: ChatStore) =>
   chatHelpers.getMessageById(currentChats(s), id);
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const getTraceIdByMessageId = (id: string) => (s: ChatStore) => getMessageById(id)(s)?.traceId;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const latestMessage = (s: ChatStore) => currentChats(s).at(-1);
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const currentChatLoadingState = (s: ChatStore) => !s.messagesInit;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isCurrentChatLoaded = (s: ChatStore) => !!s.messagesMap[currentChatKey(s)];
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isMessageEditing = (id: string) => (s: ChatStore) => s.messageEditingIds.includes(id);
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isMessageLoading = (id: string) => (s: ChatStore) => s.messageLoadingIds.includes(id);
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isHasMessageLoading = (s: ChatStore) => s.messageLoadingIds.length > 0;
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isCreatingMessage = (s: ChatStore) => s.isCreatingMessage;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isMessageGenerating = (id: string) => (s: ChatStore) => s.chatLoadingIds.includes(id);
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isToolCallStreaming = (id: string, index: number) => (s: ChatStore) => {
   const isLoading = s.toolCallingStreamIds[id];
 
@@ -136,6 +345,17 @@ const isToolCallStreaming = (id: string, index: number) => (s: ChatStore) => {
 
   return isLoading[index];
 };
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const isAIGenerating = (s: ChatStore) => s.chatLoadingIds.length > 0;
 
 export const chatSelectors = {

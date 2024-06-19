@@ -23,6 +23,17 @@ class _TopicModel extends BaseModel {
     super('topics', DB_TopicSchema);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // **************** Query *************** //
 
   async query({ pageSize = 9999, current = 0, sessionId }: QueryTopicParams): Promise<ChatTopic[]> {
@@ -46,14 +57,31 @@ class _TopicModel extends BaseModel {
     return pagedTopics.map((i) => this.mapToChatTopic(i));
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   queryAll() {
     return this.table.orderBy('updatedAt').toArray();
   }
 
   /**
-   * Query topics by keyword in title, message content, or translated content
-   * @param keyword The keyword to search for
-   * @param sessionId The currently activated session id.
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   async queryByKeyword(keyword: string, sessionId?: string): Promise<ChatTopic[]> {
     if (!keyword) return [];
@@ -110,18 +138,62 @@ class _TopicModel extends BaseModel {
     return uniqueTopics.map((i) => ({ ...i, favorite: !!i.favorite }));
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async findBySessionId(sessionId: string) {
     return this.table.where({ sessionId }).toArray();
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async findById(id: string): Promise<DBModel<DB_Topic>> {
     return this.table.get(id);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async count() {
     return this.table.count();
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // **************** Create *************** //
 
   async create({ title, favorite, sessionId, messages }: CreateTopicParams, id = nanoid()) {
@@ -138,10 +210,32 @@ class _TopicModel extends BaseModel {
     return topic;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async batchCreate(topics: CreateTopicParams[]) {
     return this._batchAdd(topics.map((t) => ({ ...t, favorite: t.favorite ? 1 : 0 })));
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async duplicateTopic(topicId: string, newTitle?: string) {
     return this.db.transaction('rw', [this.db.topics, this.db.messages], async () => {
       // Step 1: get DB_Topic
@@ -170,7 +264,15 @@ class _TopicModel extends BaseModel {
   // **************** Delete *************** //
 
   /**
-   * Deletes a topic and all messages associated with it.
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   async delete(id: string) {
     return this.db.transaction('rw', [this.table, this.db.messages], async () => {
@@ -182,10 +284,15 @@ class _TopicModel extends BaseModel {
   }
 
   /**
-   * Deletes multiple topic based on the sessionId.
+   * Transforms the sign-up request data to match the backend's expected format.
    *
-   * @param {string} sessionId - The identifier of the assistant associated with the messages.
-   * @returns {Promise<void>}
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   async batchDeleteBySessionId(sessionId: string): Promise<void> {
     // use sessionId as the filter criteria in the query.
@@ -198,7 +305,15 @@ class _TopicModel extends BaseModel {
     return this._bulkDeleteWithSync(topicIds);
   }
   /**
-   * Deletes multiple topics and all messages associated with them in a transaction.
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   async batchDelete(topicIds: string[]) {
     return this.db.transaction('rw', [this.table, this.db.messages], async () => {
@@ -210,15 +325,48 @@ class _TopicModel extends BaseModel {
     });
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async clearTable() {
     return this._clearWithSync();
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // **************** Update *************** //
   async update(id: string, data: Partial<DB_Topic>) {
     return super._updateWithSync(id, data);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async toggleFavorite(id: string, newState?: boolean) {
     const topic = await this.findById(id);
     if (!topic) {

@@ -9,6 +9,17 @@ import { parseMarkdown } from '@/utils/parseMarkdown';
 export const SHARE_GPT_URL = 'https://sharegpt.com/api/conversations';
 
 class ShareService {
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   public async createShareGPTUrl(conversation: ShareGPTConversation) {
     const items = [];
 
@@ -36,18 +47,30 @@ class ShareService {
   }
 
   /**
-   * Creates a share settings URL with the provided settings.
-   * @param settings - The settings object to be encoded in the URL.
-   * @returns The share settings URL.
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   public createShareSettingsUrl(settings: DeepPartial<UserSettings>) {
     return withBasePath(`/?${LOBE_URL_IMPORT_NAME}=${encodeURI(JSON.stringify(settings))}`);
   }
 
   /**
-   * Decode share settings from search params
-   * @param settings
-   * @returns
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
    */
   public decodeShareSettings(settings: string) {
     try {

@@ -29,6 +29,17 @@ export class LobeZhipuAI implements LobeRuntimeAI {
     this.baseURL = this.client.baseURL;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   static async fromAPIKey({ apiKey, baseURL = DEFAULT_BASE_URL, ...res }: ClientOptions) {
     const invalidZhipuAPIKey = AgentRuntimeError.createError(
       AgentRuntimeErrorType.InvalidProviderAPIKey,
@@ -50,6 +61,17 @@ export class LobeZhipuAI implements LobeRuntimeAI {
     return new LobeZhipuAI(llm);
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async chat(payload: ChatStreamPayload, options?: ChatCompetitionOptions) {
     try {
       const params = this.buildCompletionsParams(payload);
@@ -85,6 +107,17 @@ export class LobeZhipuAI implements LobeRuntimeAI {
     }
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private buildCompletionsParams(payload: ChatStreamPayload) {
     const { messages, temperature, top_p, ...params } = payload;
 

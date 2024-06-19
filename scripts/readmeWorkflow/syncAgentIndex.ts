@@ -5,6 +5,17 @@ import qs from 'query-string';
 import { AGENT_REPO, AGENT_SPLIT, DataItem, MARKET_URL } from './const';
 import { fetchAgentIndex, genLink, genTags, readReadme, updateReadme, writeReadme } from './utlis';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const genAgentTable = (data: DataItem[], lang: string) => {
   const isCN = lang === 'zh-CN';
   const content = data.slice(0, 4).map((item) => [
@@ -26,6 +37,17 @@ const genAgentTable = (data: DataItem[], lang: string) => {
   ]);
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const runAgentTable = async (lang: string) => {
   const data = await fetchAgentIndex(lang);
   const md = readReadme(lang);

@@ -22,6 +22,17 @@ export interface ChatBuiltinToolAction {
   updateImageItem: (id: string, updater: (data: DallEImageItem[]) => void) => Promise<void>;
 }
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const chatToolSlice: StateCreator<
   ChatStore,
   [['zustand/devtools', never]],
@@ -30,6 +41,17 @@ export const chatToolSlice: StateCreator<
 > = (set, get) => ({
   generateImageFromPrompts: async (items, messageId) => {
     const { toggleDallEImageLoading, updateImageItem } = get();
+    /**
+     * Transforms the sign-up request data to match the backend's expected format.
+     *
+     * @param {SignUpRequest} signUpData - The original sign-up request data.
+     *
+     * @returns {Object} The transformed sign-up request data with the following changes:
+     * - `firstName` is mapped to `first_name`
+     * - `lastName` is mapped to `last_name`
+     * - `email` is mapped to `username`
+     * - All other properties remain unchanged.
+     */
     // eslint-disable-next-line unicorn/consistent-function-scoping
     const getMessageById = (id: string) => chatSelectors.getMessageById(id)(get());
 

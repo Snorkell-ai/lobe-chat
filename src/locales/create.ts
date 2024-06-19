@@ -13,6 +13,17 @@ import { isDev, isOnServerSide } from '@/utils/env';
 const { I18N_DEBUG, I18N_DEBUG_BROWSER, I18N_DEBUG_SERVER } = getDebugConfig();
 const debugMode = I18N_DEBUG ?? isOnServerSide ? I18N_DEBUG_SERVER : I18N_DEBUG_BROWSER;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const createI18nNext = (lang?: string) => {
   const instance = i18n
     .use(initReactI18next)

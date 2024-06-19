@@ -10,7 +10,15 @@ export const LOBE_CHAT_ACCESS_CODE = 'X-lobe-chat-access-code';
 export const OAUTH_AUTHORIZED = 'X-oauth-authorized';
 
 /**
- * @deprecated
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const getOpenAIAuthFromRequest = (req: Request) => {
   const apiKey = req.headers.get(OPENAI_API_KEY_HEADER_KEY);

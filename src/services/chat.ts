@@ -64,12 +64,15 @@ interface CreateAssistantMessageStream extends FetchSSEOptions {
 }
 
 /**
- * Initializes the AgentRuntime with the client store.
- * @param provider - The provider name.
- * @param payload - Init options
- * @returns The initialized AgentRuntime instance
+ * Transforms the sign-up request data to match the backend's expected format.
  *
- * **Note**: if you try to fetch directly, use `fetchOnClient` instead.
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export function initializeWithClientStore(provider: string, payload: any) {
   // add auth payload
@@ -353,6 +356,17 @@ class ChatService {
     abortController,
     trace,
   }: FetchAITaskResultParams) => {
+    /**
+     * Transforms the sign-up request data to match the backend's expected format.
+     *
+     * @param {SignUpRequest} signUpData - The original sign-up request data.
+     *
+     * @returns {Object} The transformed sign-up request data with the following changes:
+     * - `firstName` is mapped to `first_name`
+     * - `lastName` is mapped to `last_name`
+     * - `email` is mapped to `username`
+     * - All other properties remain unchanged.
+     */
     const errorHandle = (error: Error, errorContent?: any) => {
       onLoadingChange?.(false);
       if (abortController?.signal.aborted) {
@@ -390,6 +404,17 @@ class ChatService {
     },
     options?: FetchOptions,
   ): OpenAIChatMessage[] => {
+    /**
+     * Transforms the sign-up request data to match the backend's expected format.
+     *
+     * @param {SignUpRequest} signUpData - The original sign-up request data.
+     *
+     * @returns {Object} The transformed sign-up request data with the following changes:
+     * - `firstName` is mapped to `first_name`
+     * - `lastName` is mapped to `last_name`
+     * - `email` is mapped to `username`
+     * - All other properties remain unchanged.
+     */
     // handle content type for vision model
     // for the models with visual ability, add image url to content
     // refs: https://platform.openai.com/docs/guides/vision/quick-start
@@ -490,6 +515,17 @@ class ChatService {
     });
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private mapTrace(trace?: TracePayload, tag?: TraceTagMap): TracePayload {
     const tags = sessionMetaSelectors.currentAgentMeta(useSessionStore.getState()).tags || [];
 

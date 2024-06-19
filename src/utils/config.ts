@@ -11,6 +11,17 @@ import {
   ExportType,
 } from '@/types/exportConfig';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const exportConfigFile = (config: object, fileName?: string) => {
   const file = `LobeChat-${fileName || '-config'}-v${CURRENT_CONFIG_VERSION}.json`;
 
@@ -34,6 +45,17 @@ export const exportConfigFile = (config: object, fileName?: string) => {
   a.remove();
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const importConfigFile = async (
   file: File,
   onConfigImport: (config: ConfigFile) => Promise<void>,
@@ -58,6 +80,17 @@ type CreateConfigFileState<T extends ExportType> = ConfigModelMap[T]['state'];
 
 type CreateConfigFile<T extends ExportType> = ConfigModelMap[T]['file'];
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const createConfigFile = <T extends ExportType>(
   type: T,
   state: CreateConfigFileState<T>,

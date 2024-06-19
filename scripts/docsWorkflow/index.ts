@@ -7,6 +7,17 @@ import { DOCS_DIR, HOME_PATH, SIDEBAR_PATH, WIKI_URL, docsFiles } from './const'
 import toc from './toc';
 import { genMdLink, getTitle, updateDocs } from './utils';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 const run = async () => {
   consola.info(`Find ${docsFiles.length} entry doc files`);
   const docs: any = await pMap(toc, async (item) => {

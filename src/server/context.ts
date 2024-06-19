@@ -14,8 +14,15 @@ export interface AuthContext {
 }
 
 /**
- * Inner function for `createContext` where we create the context.
- * This is useful for testing when we don't want to mock Next.js' request/response
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const createContextInner = async (params?: {
   auth?: ClerkAuth;
@@ -30,8 +37,15 @@ export const createContextInner = async (params?: {
 export type Context = Awaited<ReturnType<typeof createContextInner>>;
 
 /**
- * Creates context for an incoming request
- * @link https://trpc.io/docs/v11/context
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const createContext = async (request: NextRequest): Promise<Context> => {
   // for API-response caching see https://trpc.io/docs/v11/caching

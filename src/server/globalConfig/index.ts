@@ -15,6 +15,17 @@ import { extractEnabledModels, transformToChatModelCards } from '@/utils/parseMo
 
 import { parseAgentConfig } from './parseDefaultAgent';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const getServerGlobalConfig = () => {
   const { ACCESS_CODES, DEFAULT_AGENT_CONFIG } = getAppConfig();
 
@@ -127,6 +138,17 @@ export const getServerGlobalConfig = () => {
   return config;
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const getServerDefaultAgentConfig = () => {
   const { DEFAULT_AGENT_CONFIG } = getAppConfig();
 

@@ -1,9 +1,15 @@
 import { FeatureFlagsSchema, IFeatureFlags } from '../schema';
 
 /**
- * 解析环境变量中的特性标志字符串。
- * @param flagString 从环境变量中读取的特性标志字符串。
- * @returns 解析后的特性标志对象。
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export function parseFeatureFlag(flagString?: string): Partial<IFeatureFlags> {
   const flags: Partial<IFeatureFlags> = {};

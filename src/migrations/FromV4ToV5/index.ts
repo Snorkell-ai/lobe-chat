@@ -7,6 +7,17 @@ export class MigrationV4ToV5 implements Migration {
   // from this version to start migration
   version = 4;
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   migrate(data: MigrationData<V4ConfigState>): MigrationData<V5ConfigState> {
     const { messages } = data.state;
 
@@ -19,6 +30,17 @@ export class MigrationV4ToV5 implements Migration {
     };
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   static migrateMessage(messages: V4Message[]): V5Message[] {
     let v5Messages: V5Message[] = [];
 

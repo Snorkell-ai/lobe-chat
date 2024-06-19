@@ -27,6 +27,17 @@ export interface StreamProtocolToolCallChunk {
   type: 'tool_calls';
 }
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const generateToolCallId = (index: number, functionName?: string) =>
   `${functionName || 'unknown_tool_call'}_${index}`;
 
@@ -36,6 +47,17 @@ export const chatStreamable = async function* <T>(stream: AsyncIterable<T>) {
   }
 };
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const createSSEProtocolTransformer = (
   transformer: (chunk: any, stack: StreamStack) => StreamProtocolChunk,
   streamStack?: StreamStack,
@@ -50,6 +72,17 @@ export const createSSEProtocolTransformer = (
     },
   });
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export function createCallbacksTransformer(cb: ChatStreamCallbacks | undefined) {
   const textEncoder = new TextEncoder();
   let aggregatedResponse = '';

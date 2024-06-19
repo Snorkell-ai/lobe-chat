@@ -6,6 +6,17 @@ import { isOnServerSide } from '@/utils/env';
 
 import { usePlatform } from './usePlatform';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const usePWAInstall = () => {
   const [canInstall, setCanInstall] = useState(false);
   const { isSupportInstallPWA, isPWA } = usePlatform();
@@ -18,6 +29,17 @@ export const usePWAInstall = () => {
     };
   }, []);
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   const installCheck = () => {
     // 当在 PWA 中时，不显示安装按钮
     if (isPWA) return false;

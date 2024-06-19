@@ -2,11 +2,28 @@ import isEqual from 'fast-deep-equal';
 import { isArray, isObject, transform } from 'lodash-es';
 
 /**
- * Compare two objects and return the difference.
- * when there are difference in array, just return the new value.
- * it's used mostly in settings
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
  */
 export const difference = <T extends object>(object: T, base: T) => {
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   const changes = (object: any, base: any) =>
     transform(object, (result: any, value, key) => {
       // First, check if value and base[key] are both arrays.

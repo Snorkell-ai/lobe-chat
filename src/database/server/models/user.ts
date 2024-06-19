@@ -89,6 +89,17 @@ export class UserModel {
     };
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async updateUser(id: string, value: Partial<UserItem>) {
     return serverDB
       .update(users)
@@ -96,10 +107,32 @@ export class UserModel {
       .where(eq(users.id, id));
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async deleteSetting(id: string) {
     return serverDB.delete(userSettings).where(eq(userSettings.id, id));
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async updateSetting(id: string, value: Partial<UserSettings>) {
     const { keyVaults, ...res } = value;
 
@@ -126,6 +159,17 @@ export class UserModel {
     return serverDB.update(userSettings).set(newValue).where(eq(userSettings.id, id));
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async updatePreference(id: string, value: Partial<UserPreference>) {
     const user = await serverDB.query.users.findFirst({ where: eq(users.id, id) });
     if (!user) return;

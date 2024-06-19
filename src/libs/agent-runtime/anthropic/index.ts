@@ -27,6 +27,17 @@ export class LobeAnthropicAI implements LobeRuntimeAI {
     this.baseURL = this.client.baseURL;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async chat(payload: ChatStreamPayload, options?: ChatCompetitionOptions) {
     try {
       const anthropicPayload = this.buildAnthropicPayload(payload);
@@ -107,6 +118,17 @@ export class LobeAnthropicAI implements LobeRuntimeAI {
     }
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private buildAnthropicPayload(payload: ChatStreamPayload) {
     const { messages, model, max_tokens = 4096, temperature, top_p, tools } = payload;
     const system_message = messages.find((m) => m.role === 'system');

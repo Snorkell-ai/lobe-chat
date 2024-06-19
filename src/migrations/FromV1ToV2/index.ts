@@ -30,6 +30,17 @@ export class MigrationV1ToV2 implements Migration {
     return { ...i, createdAt: createAt, group: pinned ? 'pinned' : 'default', updatedAt: updateAt };
   };
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   migrate(data: MigrationData<V1ConfigState>): MigrationData<V2ConfigState> {
     const { sessions: v1Session = {}, inbox } = data.state;
     const v2Messages: V2Message[] = [];

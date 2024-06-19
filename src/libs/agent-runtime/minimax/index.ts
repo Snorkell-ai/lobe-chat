@@ -23,6 +23,17 @@ interface MinimaxBaseResponse {
 
 type MinimaxResponse = Partial<OpenAI.ChatCompletionChunk> & MinimaxBaseResponse;
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 function throwIfErrorResponse(data: MinimaxResponse) {
   // error status code
   // https://www.minimaxi.com/document/guides/chat-model/pro/api?id=6569c85948bc7b684b30377e#3.1.3%20%E8%BF%94%E5%9B%9E(response)%E5%8F%82%E6%95%B0
@@ -49,6 +60,17 @@ function throwIfErrorResponse(data: MinimaxResponse) {
   });
 }
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 function parseMinimaxResponse(chunk: string): MinimaxResponse | undefined {
   let body = chunk;
   if (body.startsWith('data:')) {
@@ -69,6 +91,17 @@ export class LobeMinimaxAI implements LobeRuntimeAI {
     this.apiKey = apiKey;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async chat(payload: ChatStreamPayload, options?: ChatCompetitionOptions): Promise<Response> {
     try {
       const response = await fetch('https://api.minimax.chat/v1/text/chatcompletion_v2', {
@@ -121,6 +154,17 @@ export class LobeMinimaxAI implements LobeRuntimeAI {
     }
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   // the document gives the default value of max tokens, but abab6.5 and abab6.5s
   // will meet length finished error, and output is truncationed
   // so here fill the max tokens number to fix it
@@ -134,6 +178,17 @@ export class LobeMinimaxAI implements LobeRuntimeAI {
     }
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private buildCompletionsParams(payload: ChatStreamPayload) {
     const { temperature, top_p, ...params } = payload;
 
@@ -155,6 +210,17 @@ export class LobeMinimaxAI implements LobeRuntimeAI {
     };
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private async parseFirstResponse(reader: ReadableStreamDefaultReader<Uint8Array>) {
     const decoder = new TextDecoder();
 

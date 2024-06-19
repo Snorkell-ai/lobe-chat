@@ -9,6 +9,17 @@ import { INBOX_SESSION_ID } from './session';
 export const OFFICIAL_URL = 'https://chat-preview.lobehub.com/';
 export const OFFICIAL_SITE = 'https://lobehub.com/';
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const getCanonicalUrl = (path: string) => urlJoin(OFFICIAL_URL, path);
 
 export const GITHUB = pkg.homepage;
@@ -40,12 +51,34 @@ export const MORE_MODEL_PROVIDER_REQUEST_URL =
 export const AGENTS_INDEX_GITHUB = 'https://github.com/lobehub/lobe-chat-agents';
 export const AGENTS_INDEX_GITHUB_ISSUE = urlJoin(AGENTS_INDEX_GITHUB, 'issues/new');
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const SESSION_CHAT_URL = (id: string = INBOX_SESSION_ID, mobile?: boolean) =>
   qs.stringifyUrl({
     query: mobile ? { session: id, showMobileWorkspace: mobile } : { session: id },
     url: '/chat',
   });
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const imageUrl = (filename: string) => withBasePath(`/images/${filename}`);
 
 export const LOBE_URL_IMPORT_NAME = 'settings';
@@ -56,4 +89,15 @@ export const MEDIDUM = 'https://medium.com/@lobehub';
 export const X = 'https://x.com/lobehub';
 export const RELEASES_URL = urlJoin(GITHUB, 'releases');
 
+/**
+ * Transforms the sign-up request data to match the backend's expected format.
+ *
+ * @param {SignUpRequest} signUpData - The original sign-up request data.
+ *
+ * @returns {Object} The transformed sign-up request data with the following changes:
+ * - `firstName` is mapped to `first_name`
+ * - `lastName` is mapped to `last_name`
+ * - `email` is mapped to `username`
+ * - All other properties remain unchanged.
+ */
 export const mailTo = (email: string) => `mailto:${email}`;

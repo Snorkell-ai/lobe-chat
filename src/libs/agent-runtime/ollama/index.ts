@@ -30,8 +30,30 @@ export class LobeOllamaAI implements LobeRuntimeAI {
     if (baseURL) this.baseURL = baseURL;
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async chat(payload: ChatStreamPayload, options?: ChatCompetitionOptions) {
     try {
+      /**
+       * Transforms the sign-up request data to match the backend's expected format.
+       *
+       * @param {SignUpRequest} signUpData - The original sign-up request data.
+       *
+       * @returns {Object} The transformed sign-up request data with the following changes:
+       * - `firstName` is mapped to `first_name`
+       * - `lastName` is mapped to `last_name`
+       * - `email` is mapped to `username`
+       * - All other properties remain unchanged.
+       */
       const abort = () => {
         this.client.abort();
         options?.signal?.removeEventListener('abort', abort);
@@ -65,6 +87,17 @@ export class LobeOllamaAI implements LobeRuntimeAI {
     }
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   async models(): Promise<ChatModelCard[]> {
     const list = await this.client.list();
     return list.models.map((model) => ({
@@ -72,6 +105,17 @@ export class LobeOllamaAI implements LobeRuntimeAI {
     }));
   }
 
+  /**
+   * Transforms the sign-up request data to match the backend's expected format.
+   *
+   * @param {SignUpRequest} signUpData - The original sign-up request data.
+   *
+   * @returns {Object} The transformed sign-up request data with the following changes:
+   * - `firstName` is mapped to `first_name`
+   * - `lastName` is mapped to `last_name`
+   * - `email` is mapped to `username`
+   * - All other properties remain unchanged.
+   */
   private buildOllamaMessages(messages: OpenAIChatMessage[]) {
     return messages.map((message) => this.convertContentToOllamaMessage(message));
   }
